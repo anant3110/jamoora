@@ -12,6 +12,8 @@ from pythonosc import osc_server
 from queue import Queue
 
 
+mainMood = 0
+
 #Music Init
 Happy = {59+12,48+12,50+12,53+12,55+12,59+12,60+12, 60+12,58+12,57+12,53+12,52+12,50+12,55+12,53+12,52+12,50+12,52+12,57+12,48+12}
 Serious = {48+12,50+12,51+12,53+12,55+12,57+12,58+12,60+12,60+12,58+12,57+12,55+12,53+12,51+12,50+12,48+12}
@@ -48,6 +50,7 @@ def is_a_in_x(A, X):
   return False
 
 def print_volume_handler(unused_addr, args, volume):
+  global mainMood
   global q, volumePrev
   if(not q.full() and volume != volumePrev and volume in range(59, 73)):
     q.put(volume)
@@ -64,13 +67,17 @@ def print_volume_handler(unused_addr, args, volume):
       q.get()
   elif(which.count(True) == 1):
     if(which[0]):
-      print("Happy")
+      #print("Happy")
+      mainMood="happy"
     if(which[1]):
-      print("Serious")
+      #print("Serious")
+      mainMood="serious"
     if(which[2]):
-      print("Angry")
+      #print("Angry")
+      mainMood="angry"
     if(which[3]):
-      print("Gloomy")
+      #print("Gloomy")
+      mainMood="gloomy"
 #End Music Functions
 
 
@@ -92,14 +99,18 @@ def executeCommand(SSH_COMMAND):
 
 def express(audio1):
 	try:
-		
+		#print("recog")
 		command = r.recognize_google(audio1, show_all=True)
+		
+		#print (command["alternative"])
 
-		for i in command["alternative"]:			
-			finalComm += " " + i["transcript"]
+		finalComm = ""
 
-		print (finalComm)
-
+		for j in command["alternative"]:
+			finalComm += " " + j["transcript"]
+		
+		print (mainMood, finalComm)
+		
 		#SSH_COMMAND = SSH_COMMAND_BASE + "PARAMS"
 
 		#executeCommand(SSH_COMMAND)
@@ -111,7 +122,7 @@ def express(audio1):
 def continuousRec():
 	while(True):
 		with mic as source:
-			print ("listening")
+			#print ("listening")
 			audio = r.record(source, duration=3) #listen
 			#print(" ")
 			#print(r.recognize_google(audio))
