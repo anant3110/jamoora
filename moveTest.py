@@ -48,6 +48,21 @@ def left(duration,speed):
 		singleBackward(2,speed);
 
 
+def unclamp():
+	bot.digitalWrite( 24, 0 );
+	bot.digitalWrite( 22, 1 );
+	sleep(1);
+	bot.digitalWrite( 24, 0 );
+	bot.digitalWrite( 22, 0 );
+
+
+def clamp():
+	bot.digitalWrite( 24, 1 );
+	bot.digitalWrite( 22, 0 );
+	sleep(1);
+	bot.digitalWrite( 24, 0 );
+	bot.digitalWrite( 22, 0 );	
+
 
 if __name__ == '__main__':
 
@@ -55,40 +70,69 @@ if __name__ == '__main__':
 	bot.start()
 	
 
+	#servoRun( port, slot, angle )
+	
+	#bot.motorRun(4, 1);
+
+	#singleBackward(1,100);
+
+	# sleep(1);
+	# bot.motorRun(4, -50);
+	
+	left(2,100)
+
+	print "hola"
+
 	while 1:
-		
-		try:
-			filename = "commands.txt"
-			file = open(filename, "r")
-		
-			for line in file:   			
-   				
-   				if "forward" in line:
-   					forward(2,100)
 
-   				if "backward" in line:
-   					backward(2,100)
+		cmd1 = "kill -9 " + str(os.getpid()+1)
+		cmd2 = "kill -9 " + str(os.getpid())
 
-   				if "left" in line:
-   					left(2,100)
+		os.system(cmd1)
+		os.system(cmd2)
 
-   				if "right" in line:
-   					right(2,100)
-
-   			file.close()
-
-   			os.remove("commands.txt")
-
-   		except:
-
-   			pass
-   			#print "Nothing To Do"
-
-   		sleep(0.01)
-
+   		sleep(1)
 
 
 #Comments
 
 	#bot.encoderMotorMove(slot,100,-1000,onBackwardFinish);
 	#bot.encoderMotorRun( slot, 100 )
+
+
+
+
+
+		# try:
+		# 	filename = "commands.txt"
+		# 	file = open(filename, "r")
+		
+		# 	for line in file:   			
+   				
+  #  				if "forward" in line:
+  #  					forward(2,100)
+
+  #  				if "backward" in line:
+  #  					backward(2,100)
+
+  #  				if "left" in line:
+  #  					left(2,100)
+
+  #  				if "right" in line:
+  #  					right(2,100)
+
+  #  				if "clamp" in line:
+  #  					clamp()
+
+  #  				if "unclamp" in line:
+  #  					unclamp()
+
+  #  			file.close()
+
+  #  			os.remove("commands.txt")
+
+  #  		except:
+
+  #  			pass
+  #  			#print "Nothing To Do"
+
