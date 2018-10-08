@@ -3,6 +3,8 @@ from threading import Thread, Lock
 import paramiko
 import sys
 
+
+
 r = sr.Recognizer()
 mic = sr.Microphone()
 sr.Microphone.list_microphone_names()

@@ -69,15 +69,6 @@ if __name__ == '__main__':
 	bot = MegaPi()
 	bot.start()
 	
-
-	#servoRun( port, slot, angle )
-	
-	#bot.motorRun(4, 1);
-
-	#singleBackward(1,100);
-
-	# sleep(1);
-	# bot.motorRun(4, -50);
 	
 	left(2,100)
 
@@ -92,6 +83,18 @@ if __name__ == '__main__':
 		os.system(cmd2)
 
    		sleep(1)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #Comments
@@ -136,3 +139,13 @@ if __name__ == '__main__':
   #  			pass
   #  			#print "Nothing To Do"
 
+
+
+	#servoRun( port, slot, angle )
+	
+	#bot.motorRun(4, 1);
+
+	#singleBackward(1,100);
+
+	# sleep(1);
+	# bot.motorRun(4, -50);
