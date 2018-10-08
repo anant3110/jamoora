@@ -111,6 +111,7 @@ def express(audio1):
 def continuousRec():
 	while(True):
 		with mic as source:
+			print ("listening")
 			audio = r.record(source, duration=3) #listen
 			#print(" ")
 			#print(r.recognize_google(audio))
@@ -120,9 +121,14 @@ def continuousRec():
 #End Speech Functions
 
 
-threadSpeech = Thread(target = continuousRec, args=(,))
+print ("lololololol")
+
+threadSpeech = Thread(target = continuousRec)
 threadSpeech.start()
 
+
+
+print ("lololololol")
 
 #Music Server Setup
 parser = argparse.ArgumentParser()
@@ -138,7 +144,6 @@ server.serve_forever()
 #End Server
 
 
-print ("lololololol")
 
 #print(r.recognize_google(audio))
 
