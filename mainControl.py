@@ -12,9 +12,11 @@ from pythonosc import osc_server
 from queue import Queue
 
 
-mainMood = 0
+
 
 #Music Init
+mainMood = 0
+
 Happy = {59+12,48+12,50+12,53+12,55+12,59+12,60+12, 60+12,58+12,57+12,53+12,52+12,50+12,55+12,53+12,52+12,50+12,52+12,57+12,48+12}
 Serious = {48+12,50+12,51+12,53+12,55+12,57+12,58+12,60+12,60+12,58+12,57+12,55+12,53+12,51+12,50+12,48+12}
 Angry = {48+12,49+12,54+12,59+12,60+12,60+12,59+12,56+12,55+12,54+12,52+12,49+12,48+12}
@@ -40,6 +42,20 @@ SSH_COMMAND_BASE = "cd Desktop/jamoora; python moveTest.py "
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh_stdin = ssh_stdout = ssh_stderr = None
+
+thirstWords = ["oasis", "dried", "desert", "thirsty", "searching"]
+findWords = ["hope", "vessel", "water", "ran"]
+lowWords = ["unfortunately", "low", "frustrated", "idea"]
+fillWords = ["pebbles", "picked", "carefully", "dropped", "level", "rise"]
+drinkWords = ["finally", "effort", "drink", "end"]
+
+
+thirstAction = 0 
+findAction = 0 
+lowAction = 0
+fillAction = 0 
+drinkAction = 0
+
 #End SSH Command Init
 
 
@@ -85,16 +101,71 @@ def print_volume_handler(unused_addr, args, volume):
 #Speech Functions
 def executeCommand(SSH_COMMAND):
 
+	print ("executing")
+	print (SSH_COMMAND)
+
 	try:
 	    ssh.connect(SSH_ADDRESS, username=SSH_USERNAME, password=SSH_PASSWORD)
 	    ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command(SSH_COMMAND)
 	except Exception as e:
 	    sys.stderr.write("SSH connection error: {0}".format(e))
 
-	if ssh_stdout:
-	    sys.stdout.write(ssh_stdout.read())
-	if ssh_stderr:
-	    sys.stderr.write(ssh_stderr.read())
+	# if ssh_stdout:
+	#     sys.stdout.write(ssh_stdout.read())
+	# if ssh_stderr:
+	#     sys.stderr.write(ssh_stderr.read())
+
+
+
+def detectMotion(mainMood,finalComm):
+
+	global thirstAction  
+	global findAction  
+	global lowAction 
+	global fillAction  
+	global drinkAction
+
+	for i in thirstWords:
+		if i in finalComm:
+			if thirstAction==0:
+				SSH_COMMAND = SSH_COMMAND_BASE + mainMood + " thirst"
+				thirstAction=1
+				executeCommand(SSH_COMMAND)
+
+	for i in thirstWords:
+		if i in finalComm:
+			if thirstAction==0:
+				SSH_COMMAND = SSH_COMMAND_BASE + mainMood + " find"
+				findAction=1
+				executeCommand(SSH_COMMAND)
+			 
+	for i in thirstWords:
+		if i in finalComm:
+			if thirstAction==0:
+				SSH_COMMAND = SSH_COMMAND_BASE + mainMood + " low"
+				lowAction=1
+				executeCommand(SSH_COMMAND)
+			
+
+	for i in thirstWords:
+		if i in finalComm:
+			if thirstAction==0:
+				SSH_COMMAND = SSH_COMMAND_BASE + mainMood + " fill"
+				fillAction=1
+				executeCommand(SSH_COMMAND)
+			 
+
+	for i in thirstWords:
+		if i in finalComm:
+			if thirstAction==0:
+				SSH_COMMAND = SSH_COMMAND_BASE + mainMood + " drink"
+				drinkAction=1
+				executeCommand(SSH_COMMAND)
+
+
+	if "reset" in finalComm:
+		SSH_COMMAND = SSH_COMMAND_BASE + " reset"
+		executeCommand(SSH_COMMAND)
 
 
 def express(audio1):
@@ -111,9 +182,7 @@ def express(audio1):
 		
 		print (mainMood, finalComm)
 		
-		#SSH_COMMAND = SSH_COMMAND_BASE + "PARAMS"
-
-		#executeCommand(SSH_COMMAND)
+		detectMotion(mainMood,finalComm)
 
 	except:
 		pass
@@ -134,9 +203,13 @@ def continuousRec():
 
 print ("lololololol")
 
+
 threadSpeech = Thread(target = continuousRec)
 threadSpeech.start()
 
+# SSH_COMMAND = str(SSH_COMMAND_BASE + "happy" + " drink")
+
+# executeCommand(SSH_COMMAND)
 
 
 print ("lololololol")

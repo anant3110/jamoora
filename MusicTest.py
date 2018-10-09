@@ -14,7 +14,7 @@ Angry = {48+12,49+12,54+12,59+12,60+12,60+12,59+12,56+12,55+12,54+12,52+12,49+12
 Gloomy = {48+12,50+12,53+12,55+12,56+12,58+12,60+12,58+12,56+12,55+12,53+12,51+12,50+12,48+12}
 
 volumePrev = 0
-q = Queue(5)
+q = Queue(7)
 
 def is_a_in_x(A, X):
   for i in range(len(X) - len(A) + 1):
@@ -23,6 +23,7 @@ def is_a_in_x(A, X):
 
 def print_volume_handler(unused_addr, args, volume):
   global q, volumePrev
+  print(volume)
   if(not q.full() and volume != volumePrev and volume in range(59, 73)):
     q.put(volume)
     volumePrev = volume

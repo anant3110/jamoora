@@ -28,7 +28,7 @@ def backward(duration,speed):
 	sleep(0.25);	
 	for i in range(0,duration):
 		singleForward(2,speed);
-		singleBackward(3,speed);
+		singleBackward(3,speed);	
 
 
 def right(duration,speed):
@@ -64,13 +64,41 @@ def clamp():
 	bot.digitalWrite( 22, 0 );	
 
 
+def up():
+
+
+def down():
+
+
 if __name__ == '__main__':
 
 	bot = MegaPi()
 	bot.start()
 	
-	
-	left(2,100)
+	print sys.argv[0]
+	print sys.argv[1]
+
+	speed=75
+
+	if sys.argv[0] == "reset":
+		clamp()
+		down()
+
+
+	if sys.argv[0] == "gloomy":
+		speed=50
+		down()
+
+
+	elif sys.argv[0] == "serious": 
+		speed=50
+
+	elif sys.argv[0] == "gloomy":
+			
+
+	elif sys.argv[0] == "serious"
+
+
 
 	print "hola"
 
