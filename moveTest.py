@@ -112,17 +112,41 @@ if __name__ == '__main__':
 	#End Manual
 
 
-	# if sys.argv[0] == "gloomy":
-	# 	speed=50
-	# 	down() #medium to down
+	if sys.argv[1] == "gloomy":
+		speed=50
+		down() #medium to down
 
-	# elif sys.argv[0] == "happy": 
-	# 	speed=100
+	elif sys.argv[1] == "happy": 
+	 	speed=100
+	 	up()
+	 	up()
+
+	elif sys.argv[1] == "angry"
+		speed=75
+		down()
+
+	elif sys.argv[1] == "serious"
+		speed=75
+		#Neck
 
 
-	# elif sys.argv[0] == "serious"
 
+	if sys.argv[2] == "thirst":
+		#thirst
 
+	elif sys.argv[2] == "find":
+		#find
+
+	elif sys.argv[2] == "low":
+		#low
+
+	elif sys.argv[2] == "fill":
+		#fill
+
+	elif sys.argv[2] == "drink":
+		#drink
+
+	
 
 	print "hola"
 
