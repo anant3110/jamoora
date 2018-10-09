@@ -83,7 +83,7 @@ if __name__ == '__main__':
 	bot.start()
 	
 
-	speed=75
+	speed=100
 
 	# down(1,50)
 
@@ -92,6 +92,12 @@ if __name__ == '__main__':
 	# 	clamp()
 	# 	down()
 
+
+	# left(1,100)
+
+	#clamp()
+
+	
 	#MANUAL COMMANDS
 	if sys.argv[1] == "up":
 		up(1,50)
@@ -102,9 +108,9 @@ if __name__ == '__main__':
 	if sys.argv[1] == "backward":
 		backward(1,75)
 	if sys.argv[1] == "right":
-		forward(1,75)
+		right(1,75)
 	if sys.argv[1] == "left":
-		backward(1,75)
+		left(1,75)
 	if sys.argv[1] == "clamp":
 		clamp()
 	if sys.argv[1] == "unclamp":
@@ -112,43 +118,43 @@ if __name__ == '__main__':
 	#End Manual
 
 
-	if sys.argv[1] == "gloomy":
-		speed=50
-		down() #medium to down
+	# if sys.argv[1] == "gloomy":
+	# 	speed=50
+	# 	down() #medium to down
 
-	elif sys.argv[1] == "happy": 
-	 	speed=100
-	 	up()
-	 	up()
+	# elif sys.argv[1] == "happy": 
+	#  	speed=100
+	#  	up()
+	#  	up()
 
-	elif sys.argv[1] == "angry"
-		speed=75
-		down()
+	# elif sys.argv[1] == "angry"
+	# 	speed=75
+	# 	down()
 
-	elif sys.argv[1] == "serious"
-		speed=75
-		#Neck
+	# elif sys.argv[1] == "serious"
+	# 	speed=75
+	# 	#Neck
+	
 
 
+	# if sys.argv[2] == "thirst":
+	# 	#thirst
 
-	if sys.argv[2] == "thirst":
-		#thirst
+	# elif sys.argv[2] == "find":
+	# 	#find
 
-	elif sys.argv[2] == "find":
-		#find
+	# elif sys.argv[2] == "low":
+	# 	#low
 
-	elif sys.argv[2] == "low":
-		#low
+	# elif sys.argv[2] == "fill":
+	# 	#fill
 
-	elif sys.argv[2] == "fill":
-		#fill
-
-	elif sys.argv[2] == "drink":
-		#drink
+	# elif sys.argv[2] == "drink":
+	# 	#drink
 
 	
 
-	print "hola"
+	# print "hola"
 
 	while 1:
 
@@ -158,7 +164,7 @@ if __name__ == '__main__':
 		os.system(cmd1)
 		os.system(cmd2)
 
-   		sleep(1)
+		sleep(1)
 
 
 

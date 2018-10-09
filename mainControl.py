@@ -166,8 +166,51 @@ def detectMotion(mainMood,finalComm):
 
 
 	if "reset" in finalComm:
-		SSH_COMMAND = SSH_COMMAND_BASE + " reset"
+		SSH_COMMAND = SSH_COMMAND_BASE + "reset"
 		executeCommand(SSH_COMMAND)
+
+
+
+	if "clamp" in finalComm:
+		SSH_COMMAND = SSH_COMMAND_BASE + "clamp"
+		executeCommand(SSH_COMMAND)
+		return
+
+	elif "open" in finalComm:
+		SSH_COMMAND = SSH_COMMAND_BASE + "unclamp"
+		executeCommand(SSH_COMMAND)
+		return
+
+	elif "up" in finalComm:
+		SSH_COMMAND = SSH_COMMAND_BASE + "up"
+		executeCommand(SSH_COMMAND)
+		return
+
+	elif "down" in finalComm:
+		SSH_COMMAND = SSH_COMMAND_BASE + "down"
+		executeCommand(SSH_COMMAND)
+		return
+
+	elif "right" in finalComm:
+		SSH_COMMAND = SSH_COMMAND_BASE + "right"
+		executeCommand(SSH_COMMAND)
+		return
+
+	elif "left" in finalComm:
+		SSH_COMMAND = SSH_COMMAND_BASE + "left"
+		executeCommand(SSH_COMMAND)
+		return
+
+	elif "forward" in finalComm:
+		SSH_COMMAND = SSH_COMMAND_BASE + "backward"
+		executeCommand(SSH_COMMAND)
+		return
+
+	elif "backward" in finalComm:
+		SSH_COMMAND = SSH_COMMAND_BASE + "forward"
+		executeCommand(SSH_COMMAND)
+		return
+
 
 
 def express(audio1):
@@ -206,13 +249,13 @@ def continuousRec():
 print ("lololololol")
 
 
-# threadSpeech = Thread(target = continuousRec)
-# threadSpeech.start()
+threadSpeech = Thread(target = continuousRec)
+threadSpeech.start()
 
 
 #Manual Intervention
-SSH_COMMAND = str(SSH_COMMAND_BASE + "backward")
-executeCommand(SSH_COMMAND)
+# SSH_COMMAND = str(SSH_COMMAND_BASE + "forward")
+# executeCommand(SSH_COMMAND)
 
 
 print ("lololololol")
