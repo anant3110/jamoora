@@ -64,10 +64,17 @@ def clamp():
 	bot.digitalWrite( 22, 0 );	
 
 
-def up():
+def up(duration,speed):
+	print "up"
+	sleep(0.25);	
+	for i in range(0,duration):
+		singleForward(1,speed);
 
-
-def down():
+def down(duration,speed):
+	print "down"
+	sleep(0.25);	
+	for i in range(0,duration):
+		singleBackward(1,speed);
 
 
 if __name__ == '__main__':
@@ -75,28 +82,45 @@ if __name__ == '__main__':
 	bot = MegaPi()
 	bot.start()
 	
-	print sys.argv[0]
-	print sys.argv[1]
 
 	speed=75
 
-	if sys.argv[0] == "reset":
+	# down(1,50)
+
+	#RESET SYSTEM
+	# if sys.argv[0] == "reset":
+	# 	clamp()
+	# 	down()
+
+	#MANUAL COMMANDS
+	if sys.argv[1] == "up":
+		up(1,50)
+	if sys.argv[1] == "down":
+		down(1,50)
+	if sys.argv[1] == "forward":
+		forward(1,75)
+	if sys.argv[1] == "backward":
+		backward(1,75)
+	if sys.argv[1] == "right":
+		forward(1,75)
+	if sys.argv[1] == "left":
+		backward(1,75)
+	if sys.argv[1] == "clamp":
 		clamp()
-		down()
+	if sys.argv[1] == "unclamp":
+		unclamp()
+	#End Manual
 
 
-	if sys.argv[0] == "gloomy":
-		speed=50
-		down()
+	# if sys.argv[0] == "gloomy":
+	# 	speed=50
+	# 	down() #medium to down
+
+	# elif sys.argv[0] == "happy": 
+	# 	speed=100
 
 
-	elif sys.argv[0] == "serious": 
-		speed=50
-
-	elif sys.argv[0] == "gloomy":
-			
-
-	elif sys.argv[0] == "serious"
+	# elif sys.argv[0] == "serious"
 
 
 

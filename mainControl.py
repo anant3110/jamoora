@@ -110,11 +110,13 @@ def executeCommand(SSH_COMMAND):
 	except Exception as e:
 	    sys.stderr.write("SSH connection error: {0}".format(e))
 
-	# if ssh_stdout:
-	#     sys.stdout.write(ssh_stdout.read())
-	# if ssh_stderr:
-	#     sys.stderr.write(ssh_stderr.read())
-
+	try:
+		if ssh_stdout:
+		    sys.stdout.write(ssh_stdout.read())
+		if ssh_stderr:
+		    sys.stderr.write(ssh_stderr.read())
+	except:
+		pass
 
 
 def detectMotion(mainMood,finalComm):
@@ -204,29 +206,30 @@ def continuousRec():
 print ("lololololol")
 
 
-threadSpeech = Thread(target = continuousRec)
-threadSpeech.start()
+# threadSpeech = Thread(target = continuousRec)
+# threadSpeech.start()
 
-# SSH_COMMAND = str(SSH_COMMAND_BASE + "happy" + " drink")
 
-# executeCommand(SSH_COMMAND)
+#Manual Intervention
+SSH_COMMAND = str(SSH_COMMAND_BASE + "backward")
+executeCommand(SSH_COMMAND)
 
 
 print ("lololololol")
 
+'''
 #Music Server Setup
 parser = argparse.ArgumentParser()
 parser.add_argument("--ip", default="127.0.0.1", help="The ip of the OSC server")
 parser.add_argument("--port", type=int, default=8000, help="The port the OSC server is listening on")
 args = parser.parse_args()
-
 dispatcher = dispatcher.Dispatcher()
 dispatcher.map("/pitch", print_volume_handler, "Pitch")
 server = osc_server.ThreadingOSCUDPServer((args.ip, args.port), dispatcher)
 print("Serving on {}".format(server.server_address))
 server.serve_forever()
 #End Server
-
+'''
 
 
 #print(r.recognize_google(audio))
