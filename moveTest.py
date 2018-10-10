@@ -76,6 +76,75 @@ def down(duration,speed):
 	for i in range(0,duration):
 		singleBackward(1,speed);
 
+def thirsty(speed):
+	left(2,speed)
+	right(4,speed)
+	left(2,speed)
+	forward(4,speed)
+	left(2,speed)
+	right(4,speed)
+	forward(4,speed)
+
+def finds(speed):
+	up(2,speed)
+	unclamp()
+	unclamp()
+	right(1,speed)
+	up(1,speed)
+	right(1,speed)
+	down(1,speed)
+	right(1,speed)
+	up(1,speed)
+	right(1,speed)
+	down(1,speed)
+	right(1,speed)
+	up(1,speed)
+	right(1,speed)
+	down(1,speed)
+
+def low(speed):
+	backward(1,speed)
+	down(1, speed)
+	clamp()
+	left(1,speed)
+	unclamp()
+	clamp()
+	unclamp()
+	right(2,speed)
+	clamp()
+	unclamp()
+	clamp()
+	unclamp()
+	left(1,speed)
+	forward(1,speed)
+
+def fill(speed):
+	up(2,speed)
+	left(2,speed)
+	down(1,speed)
+	clamp()
+	up(1,speed)
+	right(2,speed)
+	unclamp()
+	left(2,speed)
+	down(1,speed)
+	clamp()
+	up(1,speed)
+	right(2,speed)
+	unclamp()
+
+def drink(speed):
+	down(1,speed)
+	clamp()
+	unclamp()
+	clamp()
+	unclamp()
+	clamp()
+	unclamp()
+	clamp()
+	unclamp()
+	up(1,speed)
+
 
 if __name__ == '__main__':
 
@@ -118,39 +187,35 @@ if __name__ == '__main__':
 	#End Manual
 
 
-	# if sys.argv[1] == "gloomy":
-	# 	speed=50
-	# 	down() #medium to down
+	if sys.argv[1] == "gloomy":
+		speed=50
+		down() #medium to down
 
-	# elif sys.argv[1] == "happy": 
-	#  	speed=100
-	#  	up()
-	#  	up()
+	elif sys.argv[1] == "happy": 
+	 	speed=100
+	 	up()
+	 	up()
 
-	# elif sys.argv[1] == "angry"
-	# 	speed=75
-	# 	down()
+	elif sys.argv[1] == "angry"
+		speed=75
+		down()
 
-	# elif sys.argv[1] == "serious"
-	# 	speed=75
-	# 	#Neck
+	elif sys.argv[1] == "serious"
+		speed=75
+		#Neck
 	
 
 
-	# if sys.argv[2] == "thirst":
-	# 	#thirst
-
-	# elif sys.argv[2] == "find":
-	# 	#find
-
-	# elif sys.argv[2] == "low":
-	# 	#low
-
-	# elif sys.argv[2] == "fill":
-	# 	#fill
-
-	# elif sys.argv[2] == "drink":
-	# 	#drink
+	if sys.argv[2] == "thirst":
+		thirsty(speed)
+	elif sys.argv[2] == "find":
+		finds(speed)
+	elif sys.argv[2] == "low":
+		low(speed)
+	elif sys.argv[2] == "fill":
+		fill(speed)
+	elif sys.argv[2] == "drink":
+		drink(speed)
 
 	
 
