@@ -19,16 +19,18 @@ def forward(duration,speed):
 	print "forward"
 	sleep(0.25);	
 	for i in range(0,duration):
-		singleForward(3,speed);
-		singleBackward(2,speed);
+		singleForward(2,speed);
+		singleBackward(3,speed);	
+	
 
 
 def backward(duration,speed):
 	print "backward"
 	sleep(0.25);	
 	for i in range(0,duration):
-		singleForward(2,speed);
-		singleBackward(3,speed);	
+		singleForward(3,speed);
+		singleBackward(2,speed);
+
 
 
 def right(duration,speed):
@@ -48,18 +50,20 @@ def left(duration,speed):
 		singleBackward(2,speed);
 
 
-def unclamp():
+def unclamp(duration):
+	print "unclamp"
 	bot.digitalWrite( 24, 0 );
 	bot.digitalWrite( 22, 1 );
-	sleep(1);
+	sleep(duration);
 	bot.digitalWrite( 24, 0 );
 	bot.digitalWrite( 22, 0 );
 
 
-def clamp():
+def clamp(duration):
+	print "clamp"
 	bot.digitalWrite( 24, 1 );
 	bot.digitalWrite( 22, 0 );
-	sleep(1);
+	sleep(duration);
 	bot.digitalWrite( 24, 0 );
 	bot.digitalWrite( 22, 0 );	
 
@@ -75,75 +79,6 @@ def down(duration,speed):
 	sleep(0.25);	
 	for i in range(0,duration):
 		singleBackward(1,speed);
-
-def thirsty(speed):
-	left(2,speed)
-	right(4,speed)
-	left(2,speed)
-	forward(4,speed)
-	left(2,speed)
-	right(4,speed)
-	forward(4,speed)
-
-def finds(speed):
-	up(2,speed)
-	unclamp()
-	unclamp()
-	right(1,speed)
-	up(1,speed)
-	right(1,speed)
-	down(1,speed)
-	right(1,speed)
-	up(1,speed)
-	right(1,speed)
-	down(1,speed)
-	right(1,speed)
-	up(1,speed)
-	right(1,speed)
-	down(1,speed)
-
-def low(speed):
-	backward(1,speed)
-	down(1, speed)
-	clamp()
-	left(1,speed)
-	unclamp()
-	clamp()
-	unclamp()
-	right(2,speed)
-	clamp()
-	unclamp()
-	clamp()
-	unclamp()
-	left(1,speed)
-	forward(1,speed)
-
-def fill(speed):
-	up(2,speed)
-	left(2,speed)
-	down(1,speed)
-	clamp()
-	up(1,speed)
-	right(2,speed)
-	unclamp()
-	left(2,speed)
-	down(1,speed)
-	clamp()
-	up(1,speed)
-	right(2,speed)
-	unclamp()
-
-def drink(speed):
-	down(1,speed)
-	clamp()
-	unclamp()
-	clamp()
-	unclamp()
-	clamp()
-	unclamp()
-	clamp()
-	unclamp()
-	up(1,speed)
 
 
 if __name__ == '__main__':
@@ -161,63 +96,107 @@ if __name__ == '__main__':
 	# 	clamp()
 	# 	down()
 
-
-	# left(1,100)
-
 	#clamp()
 
-	
+	# sleep(1);
+
+	# bot.encoderMotorSetCurPosZero(3);
+	# bot.encoderMotorSetCurPosZero(2);
+
+
 	#MANUAL COMMANDS
 	if sys.argv[1] == "up":
-		up(1,50)
+		up(1,100)
 	if sys.argv[1] == "down":
-		down(1,50)
+		down(1,100)
 	if sys.argv[1] == "forward":
-		forward(1,75)
+		forward(5,75)
 	if sys.argv[1] == "backward":
-		backward(1,75)
+		backward(5,75)
 	if sys.argv[1] == "right":
-		right(1,75)
+		right(5,75)
 	if sys.argv[1] == "left":
-		left(1,75)
+		left(5,75)
 	if sys.argv[1] == "clamp":
-		clamp()
+		clamp(3)
 	if sys.argv[1] == "unclamp":
-		unclamp()
+		unclamp(3)
 	#End Manual
 
 
 	if sys.argv[1] == "gloomy":
 		speed=50
-		down() #medium to down
+		down(1,100) #medium to down
 
 	elif sys.argv[1] == "happy": 
-	 	speed=100
-	 	up()
-	 	up()
+		speed=100
+		up(2,100)
 
-	elif sys.argv[1] == "angry"
+	elif sys.argv[1] == "angry":
 		speed=75
-		down()
+		#down(1,100)
 
-	elif sys.argv[1] == "serious"
+	elif sys.argv[1] == "serious":
 		speed=75
 		#Neck
 	
 
+	try:
 
-	if sys.argv[2] == "thirst":
-		thirsty(speed)
-	elif sys.argv[2] == "find":
-		finds(speed)
-	elif sys.argv[2] == "low":
-		low(speed)
-	elif sys.argv[2] == "fill":
-		fill(speed)
-	elif sys.argv[2] == "drink":
-		drink(speed)
 
-	
+		if sys.argv[2] == "thirst":
+			left(4,speed)
+			sleep(1);
+			forward(4,speed)
+			sleep(1);
+			backward(4,speed)
+			sleep(1);
+			right(10,speed)
+			pass
+			
+		elif sys.argv[2] == "find":
+
+			clamp(1)
+			unclamp(1)
+			clamp(1)
+			unclamp(1)
+			forward(5,speed)
+			pass
+
+		elif sys.argv[2] == "low":
+			backward(3,speed)
+			down(1, speed)
+			clamp(1)
+			forward(1,speed)
+			pass
+
+		elif sys.argv[2] == "fill":
+			
+			left(6,speed)
+			forward(3,speed)
+			unclamp(2)
+			clamp(2)
+			backward(3,speed)
+			right(7,speed)
+			unclamp(2)
+			pass
+
+		elif sys.argv[2] == "drink":
+			#drink
+			up(2,speed)
+			clamp(1)
+			unclamp(1)
+			clamp(1)
+			unclamp(1)
+			clamp(1)
+			unclamp(1)
+			clamp(1)
+			unclamp(1)
+
+
+	except:
+		pass
+		
 
 	# print "hola"
 
