@@ -17,10 +17,10 @@ from queue import Queue
 #Music Init
 mainMood = "0"
 
-Happy = {59,60,62,65,67,71,72,70,69,65,64,62,67,65,64,62,64,69,60,59+12,60+12,62+12,65+12,67+12,71+12,72+12,70+12,69+12,65+12,64+12,62+12,67+12,65+12,64+12,62+12,64+12,69+12,60+12,59-12,60-12,62-12,65-12,67-12,71-12,72-12,70-12,69-12,65-12,64-12,62-12,67-12,65-12,64-12,62-12,64-12,69-12,60-12}
-Serious = {60,62,63,65,67,69,70,72,72,70,69,67,65,63,62,60,60-12,62-12,63-12,65-12,67-12,69-12,70-12,72-12,72-12,70-12,69-12,67-12,65-12,63-12,62-12,60-12,60+12,62+12,63+12,65+12,67+12,69+12,70+12,72+12,72+12,70+12,69+12,67+12,65+12,63+12,62+12,60+12,}
-Angry = {60,61,66,71,72,72,71,68,67,66,64,61,60,60+12,61+12,66+12,71+12,72+12,72+12,71+12,68+12,67+12,66+12,64+12,61+12,60+12,60-12,61-12,66-12,71-12,72-12,72-12,71-12,68-12,67-12,66-12,64-12,61-12,60-12}
-Gloomy = {60,62,65,67,68,70,72,70,68,67,65,63,62,60,60-12,62-12,65-12,67-12,68-12,70-12,72-12,70-12,68-12,67-12,65-12,63-12,62-12,60-12,60+12,62+12,65+12,67+12,68+12,70+12,72+12,70+12,68+12,67+12,65+12,63+12,62+12,60+12}
+Happy = {59+12,48+12,50+12,53+12,55+12,59+12,60+12, 60+12,58+12,57+12,53+12,52+12,50+12,55+12,53+12,52+12,50+12,52+12,57+12,48+12}
+Serious = {48+12,50+12,51+12,53+12,55+12,57+12,58+12,60+12,60+12,58+12,57+12,55+12,53+12,51+12,50+12,48+12}
+Angry = {48+12,49+12,54+12,59+12,60+12,60+12,59+12,56+12,55+12,54+12,52+12,49+12,48+12}
+Gloomy = {48+12,50+12,53+12,55+12,56+12,58+12,60+12,58+12,56+12,55+12,53+12,51+12,50+12,48+12}
 
 volumePrev = 0
 q = Queue(4)
@@ -68,32 +68,85 @@ def is_a_in_x(A, X):
 def print_volume_handler(unused_addr, args, volume):
   global mainMood
   global q, volumePrev
-  if(not q.full() and volume != volumePrev and volume in range(59, 73)):
-    q.put(volume)
-    volumePrev = volume
-  elif(q.full() and volume != volumePrev and volume in range(59,73)):
-    q.get()
-    q.put(volume)
-    volumePrev = volume
-  l = list(q.queue)
-  s = set(l)
-  which = [s.issubset(Happy) , s.issubset(Serious), s.issubset(Angry), s.issubset(Gloomy)]
-  if(which.count(True) == 0):
-    while(not q.empty):
-      q.get()
-  elif(which.count(True) == 1):
-    if(which[0]):
-      # print("Happy")
-      mainMood="happy"
-    if(which[1]):
-      # print("Serious")
-      mainMood="serious"
-    if(which[2]):
-      # print("Angry")
-      mainMood="angry"
-    if(which[3]):
-      # print("Gloomy")
-      mainMood="gloomy"
+  global thirstAction  
+  global findAction  
+  global lowAction 
+  global fillAction  
+  global drinkAction
+  if(thirstAction == 1 or fillAction == 1 or drinkAction == 1 or lowAction == 1 or findAction == 1):  
+	  if(not q.full() and volume != volumePrev and volume in range(59, 73)):
+	    q.put(volume)
+	    volumePrev = volume
+	  elif(q.full() and volume != volumePrev and volume in range(59,73)):
+	    q.get()
+	    q.put(volume)
+	    volumePrev = volume
+	  l = list(q.queue)
+	  s = set(l)
+	  which = [s.issubset(Happy) , s.issubset(Serious), s.issubset(Angry), s.issubset(Gloomy)]
+	  if(which.count(True) == 0):
+	    while(not q.empty):
+	      q.get()
+	  elif(which.count(True) == 1):
+	    if(which[0]):
+	      print("Happy")
+	      mainMood="happy"
+	    if(which[1]):
+	      print("Serious")
+	      mainMood="serious"
+	    if(which[2]):
+	      print("Angry")
+	      mainMood="angry"
+	    if(which[3]):
+	      print("Gloomy")
+	      mainMood="gloomy"
+	    else:
+	      mainMood="nothing"
+	  if(thirstAction == 1 and mainMood != "nothing"):
+	  	  SSH_COMMAND = SSH_COMMAND_BASE + mainMood + "thirst"
+	  	  print('\n')
+	  	  executeCommand(SSH_COMMAND)
+	  	  print('\n')
+	  	  thirstAction = 2
+	  	  mainMood = "nothing"
+	  	  while(not q.empty):
+	  	  	q.get()
+	  if(fillAction == 1 and mainMood != "nothing"):
+	  	  SSH_COMMAND = SSH_COMMAND_BASE + mainMood + "fill"
+	  	  print('\n')
+	  	  executeCommand(SSH_COMMAND)
+	  	  print('\n')
+	  	  fillAction = 2
+	  	  mainMood = "nothing"
+	  	  while(not q.empty):
+	  	  	q.get()
+	  if(drinkAction == 1 and mainMood != "nothing"):
+	  	  SSH_COMMAND = SSH_COMMAND_BASE + mainMood + "drink"
+	  	  print('\n')
+	  	  executeCommand(SSH_COMMAND)
+	  	  print('\n')
+	  	  drinkAction = 2
+	  	  mainMood = "nothing"
+	  	  while(not q.empty):
+	  	  	q.get()
+	  if(lowAction == 1 and mainMood != "nothing"):
+	  	  SSH_COMMAND = SSH_COMMAND_BASE + mainMood + "low"
+	  	  print('\n')
+	  	  executeCommand(SSH_COMMAND)
+	  	  print('\n')
+	  	  lowAction = 2
+	  	  mainMood = "nothing"
+	  	  while(not q.empty):
+	  	  	q.get()
+	  if(findAction == 1 and mainMood != "nothing"):
+	  	  SSH_COMMAND = SSH_COMMAND_BASE + mainMood + "find"
+	  	  print('\n')
+	  	  executeCommand(SSH_COMMAND)
+	  	  print('\n')
+	  	  findAction = 2
+	  	  mainMood = "nothing"
+	  	  while(not q.empty):
+	  	  	q.get()
 #End Music Functions
 
 
@@ -132,51 +185,28 @@ def detectMotion(mainMood,finalComm):
 	for i in thirstWords:
 		if i in finalComm.split():
 			if thirstAction==0:
-				SSH_COMMAND = SSH_COMMAND_BASE + mainMood + " thirst"
 				thirstAction=1
-				print("\n")
-				executeCommand(SSH_COMMAND)
-				print("\n")
 
 	for i in findWords:
 		if i in finalComm.split():
 			if findAction==0:
-				SSH_COMMAND = SSH_COMMAND_BASE + mainMood + " find"
 				findAction=1
-				print("\n")
-				executeCommand(SSH_COMMAND)
-				print("\n")
 			 
 	for i in lowWords:
 		if i in finalComm.split():
 			if lowAction==0:
-				SSH_COMMAND = SSH_COMMAND_BASE + mainMood + " low"
 				lowAction=1
-				print("\n")
-				executeCommand(SSH_COMMAND)
-				print("\n")
-			
 
 	for i in fillWords:
 		if i in finalComm.split():
 			if fillAction==0:
-				SSH_COMMAND = SSH_COMMAND_BASE + mainMood + " fill"
 				fillAction=1
-				print("\n")
-				executeCommand(SSH_COMMAND)
-				print("\n")
-			 
 
 	for i in drinkWords:
 		if i in finalComm.split():
 			if drinkAction==0:
-				SSH_COMMAND = SSH_COMMAND_BASE + mainMood + " drink"
 				drinkAction=1
-				print("\n")
-				executeCommand(SSH_COMMAND)
-				print("\n")
-
-
+				
 	# if "reset" in finalComm.split():
 	# 	SSH_COMMAND = SSH_COMMAND_BASE + "reset"
 	# 	executeCommand(SSH_COMMAND)
