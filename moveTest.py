@@ -142,7 +142,6 @@ if __name__ == '__main__':
 		#Neck
 	
 
-<<<<<<< HEAD
 
 	if sys.argv[2] == "thirst":
 		thirsty(speed)
@@ -158,7 +157,6 @@ if __name__ == '__main__':
 		interactive(sys.argv[1])
 
 	
-=======
 	try:
 
 
@@ -215,7 +213,6 @@ if __name__ == '__main__':
 	except:
 		pass
 		
->>>>>>> 48cc89ab051cc93add47920e8142bd333fffe43e
 
 	# print "hola"
 
