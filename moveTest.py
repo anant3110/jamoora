@@ -5,6 +5,7 @@ import os
 def doNothing(temp):
 	pass
 
+
 def singleForward(slot,speed):
 	sleep(0.4);
 	bot.encoderMotorMove(slot,speed,-1000,doNothing);	
@@ -216,6 +217,8 @@ if __name__ == '__main__':
 		fill(speed)
 	elif sys.argv[2] == "drink":
 		drink(speed)
+	elif sys.argv[2] == "interactive":
+		interactive(sys.argv[1])
 
 	
 
@@ -232,6 +235,45 @@ if __name__ == '__main__':
 		sleep(1)
 
 
+def interactive(mood):
+	if(mood == "happy"):
+		up()
+		unclamp()
+		sleep(1)
+		forward(2,100)
+		backward(2,100)
+		down()
+	if(mood == "gloomy"):
+		down(1,10)
+		clamp()
+		forward(2,25)
+		sleep(2)
+		backward(2,25)
+		up(1,100)
+		unclamp()
+	if(mood == "angry"):
+		forward(1,10)
+		up(1,100)
+		clamp()
+		sleep(1)
+		down(1,100)
+		unclamp()
+		sleep(1)
+		up(1,100)
+		clamp()
+		backward(1,10)
+		down(1,100)
+		unclamp()
+		sleep(1)
+	if(mood == "serious"):
+		down(1,100)
+		unclamp()
+		unclamp()
+		forward(2,100)
+		backward(2,100)
+		clamp()
+		clamp()
+		up(1,100)
 
 
 
